@@ -1,0 +1,15 @@
+services:
+  db_delivery:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - "./src/test/resources/database/Schema.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./src/test/resources/database/Data.sql:/docker-entrypoint-initdb.d/2.sql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: "reprocessing"
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3306:3306"
