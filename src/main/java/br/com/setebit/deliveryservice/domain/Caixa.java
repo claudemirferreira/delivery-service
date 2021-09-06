@@ -1,18 +1,15 @@
 package br.com.setebit.deliveryservice.domain;
 
 import java.io.Serializable;
-import java.util.List;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import br.com.setebit.deliveryservice.enums.StatusCaixaEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,16 +20,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entregador implements Serializable {
-	
+public class Caixa implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "entregador_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "caixa_id")
 	private Integer id;
-	
+
 	@Column(length = 100, nullable = false)
-	private String nome;
+	private OffsetDateTime data;
+
+	@Column(length = 1, nullable = false)
+	private String status;
 
 }
