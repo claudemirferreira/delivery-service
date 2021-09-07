@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import br.com.setebit.deliveryservice.enums.StatusCaixaEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

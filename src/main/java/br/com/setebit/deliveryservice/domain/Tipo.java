@@ -1,7 +1,5 @@
 package br.com.setebit.deliveryservice.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,16 +16,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entregador implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+public class Tipo {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "entregador_id")
+	@Column(name = "tipo_id")
 	private Integer id;
-
-	@Column(length = 100, nullable = false)
+	
 	private String nome;
 
 }
