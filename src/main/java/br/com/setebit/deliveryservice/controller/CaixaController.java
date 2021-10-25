@@ -16,28 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.setebit.deliveryservice.domain.Entregador;
-import br.com.setebit.deliveryservice.response.Response;
-import br.com.setebit.deliveryservice.service.EntregadorService;
+import br.com.setebit.deliveryservice.domain.Caixa;
+import br.com.setebit.deliveryservice.service.CaixaService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/delivery/entregador/")
-public class EntregadorController {
+@RequestMapping("/delivery/caixa/")
+public class CaixaController {
 
 	@Autowired
-	EntregadorService service;
+	CaixaService service;
 
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Entregador>> find() {
+	public ResponseEntity<List<Caixa>> find() {
 		return ResponseEntity.ok(service.findAll());
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Entregador>> findById(@PathVariable("id") Integer id) {
-		Response<Entregador> response = new Response<Entregador>();
-		response.setContent(service.findById(id));
-		return ResponseEntity.ok(response);
+	public ResponseEntity<Caixa> findById(@PathVariable("id") Integer id) {
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
@@ -51,15 +48,12 @@ public class EntregadorController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Entregador>> save(HttpServletResponse resp, @Valid @RequestBody Entregador obj) {
-
-		Response<Entregador> response = new Response<Entregador>();
+	public ResponseEntity<Caixa> save(HttpServletResponse resp, @Valid @RequestBody Caixa obj) {
 		try {
-			Entregador entity = service.save(obj);
-			response.setContent(entity);
-			return ResponseEntity.ok(response);
+			Caixa entity = service.save(obj);
+			return ResponseEntity.ok(entity);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(response);
+			return ResponseEntity.badRequest().body(obj);
 		}
 	}
 }
