@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.setebit.deliveryservice.domain.Entregador;
+import br.com.setebit.deliveryservice.dto.EntregadorDTO;
 import br.com.setebit.deliveryservice.service.EntregadorService;
 
 @CrossOrigin(origins = "*")
@@ -28,8 +30,11 @@ public class EntregadorController {
 	EntregadorService service;
 
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Entregador>> find() {
-		return ResponseEntity.ok(service.findAll());
+	public ResponseEntity<List<Entregador>> find(
+			@RequestParam(value = "id", required = false, defaultValue = "0") Integer id,
+			@RequestParam(value = "nome", required = false, defaultValue = "") String nome) {
+		EntregadorDTO dto = EntregadorDTO.builder().id(id).nome(nome).build();
+		return ResponseEntity.ok(service.find(dto));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
