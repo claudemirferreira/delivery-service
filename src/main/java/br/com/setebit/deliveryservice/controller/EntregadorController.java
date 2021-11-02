@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.setebit.deliveryservice.domain.Entregador;
-import br.com.setebit.deliveryservice.response.Response;
 import br.com.setebit.deliveryservice.service.EntregadorService;
 
 @CrossOrigin(origins = "*")
@@ -34,10 +33,8 @@ public class EntregadorController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Entregador>> findById(@PathVariable("id") Integer id) {
-		Response<Entregador> response = new Response<Entregador>();
-		response.setContent(service.findById(id));
-		return ResponseEntity.ok(response);
+	public ResponseEntity<Entregador> findById(@PathVariable("id") Integer id) {
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
@@ -51,15 +48,7 @@ public class EntregadorController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Entregador>> save(HttpServletResponse resp, @Valid @RequestBody Entregador obj) {
-
-		Response<Entregador> response = new Response<Entregador>();
-		try {
-			Entregador entity = service.save(obj);
-			response.setContent(entity);
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(response);
-		}
+	public ResponseEntity<Entregador> save(HttpServletResponse resp, @Valid @RequestBody Entregador obj) {
+		return ResponseEntity.ok(service.save(obj));
 	}
 }

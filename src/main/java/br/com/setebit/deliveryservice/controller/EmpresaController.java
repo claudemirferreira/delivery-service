@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.setebit.deliveryservice.domain.Empresa;
-import br.com.setebit.deliveryservice.response.Response;
 import br.com.setebit.deliveryservice.service.EmpresaService;
 
 @CrossOrigin(origins = "*")
@@ -26,16 +25,12 @@ public class EmpresaController {
 	
 	
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<List<Empresa>>> find() {
-		Response<List<Empresa>> response = new Response<List<Empresa>>();
-		response.setContent(service.findAll());
-		return ResponseEntity.ok(response);
+	public ResponseEntity<List<Empresa>> find() {
+		return ResponseEntity.ok(service.findAll());
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Empresa>> save(@RequestBody Empresa empresa) {
-		Response<Empresa> response = new Response<Empresa>();
-		response.setContent(service.save(empresa));
-		return ResponseEntity.ok(response);
+	public ResponseEntity<Empresa> save(@RequestBody Empresa empresa) {
+		return ResponseEntity.ok(service.save(empresa));
 	}
 }

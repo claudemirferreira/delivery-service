@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.setebit.deliveryservice.domain.Entrega;
 import br.com.setebit.deliveryservice.dto.EntregaResumoDTO;
-import br.com.setebit.deliveryservice.response.Response;
 import br.com.setebit.deliveryservice.service.EntregaService;
 
 @CrossOrigin(origins = "*")
@@ -35,22 +34,13 @@ public class EntregaController {
 	EntregaService service;
 
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<List<Entrega>>> find() {
-		Response<List<Entrega>> response = new Response<List<Entrega>>();
-		response.setContent(service.findAll());
-		return ResponseEntity.ok(response);
+	public ResponseEntity<List<Entrega>> find() {
+		return ResponseEntity.ok(service.findAll());
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Entrega>> findById(@PathVariable("id") Integer id) {
-		Response<Entrega> response = new Response<Entrega>();
-		try {
-			response.setContent(service.findById(id));
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			response.getErrors().add("Register not found id:" + id);
-			return ResponseEntity.badRequest().body(response);
-		}
+	public ResponseEntity<Entrega> findById(@PathVariable("id") Integer id) {
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
@@ -64,16 +54,8 @@ public class EntregaController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Entrega>> save(HttpServletResponse resp, @Valid @RequestBody Entrega obj) {
-
-		Response<Entrega> response = new Response<Entrega>();
-		try {
-			Entrega entity = service.save(obj);
-			response.setContent(entity);
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(response);
-		}
+	public ResponseEntity<Entrega> save(HttpServletResponse resp, @Valid @RequestBody Entrega obj) {
+		return ResponseEntity.ok(service.save(obj));
 	}
 
 	@GetMapping("/download/{caixaId}/{entregadorId}")
@@ -86,14 +68,7 @@ public class EntregaController {
 	}
 
 	@RequestMapping(value = "resumo/{caixaId}", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<List<EntregaResumoDTO>>> buscarResumo(@PathVariable("caixaId") Integer caixaId) {
-		Response<List<EntregaResumoDTO>> response = new Response<List<EntregaResumoDTO>>();
-		try {
-			response.setContent(service.buscarResumo(caixaId));
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			response.getErrors().add("Register not found id:" + caixaId);
-			return ResponseEntity.badRequest().body(response);
-		}
+	public ResponseEntity<List<EntregaResumoDTO>> buscarResumo(@PathVariable("caixaId") Integer caixaId) {
+			return ResponseEntity.ok(service.buscarResumo(caixaId));
 	}
 }
