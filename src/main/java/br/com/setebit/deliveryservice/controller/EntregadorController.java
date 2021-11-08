@@ -32,8 +32,9 @@ public class EntregadorController {
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Entregador>> find(
 			@RequestParam(value = "id", required = false, defaultValue = "0") Integer id,
-			@RequestParam(value = "nome", required = false, defaultValue = "") String nome) {
-		EntregadorDTO dto = EntregadorDTO.builder().id(id).nome(nome).build();
+			@RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+			@RequestParam(value = "status", required = false, defaultValue = "") String status) {
+		EntregadorDTO dto = EntregadorDTO.builder().id(id).nome(nome).status(status).build();
 		return ResponseEntity.ok(service.find(dto));
 	}
 

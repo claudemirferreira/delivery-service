@@ -3,6 +3,7 @@ package br.com.setebit.deliveryservice.service;
 import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import br.com.setebit.deliveryservice.domain.Caixa;
 import br.com.setebit.deliveryservice.domain.Entrega;
 import br.com.setebit.deliveryservice.domain.Entregador;
 import br.com.setebit.deliveryservice.dto.EntregaResumoDTO;
+import br.com.setebit.deliveryservice.enums.StatusEntregaEnum;
 import br.com.setebit.deliveryservice.exception.EntregadorNotFoundException;
 import br.com.setebit.deliveryservice.exception.NoDataFoundException;
 import br.com.setebit.deliveryservice.repository.EntregaRepository;
@@ -50,6 +52,8 @@ public class EntregaService {
 	}
 
 	public Entrega save(Entrega entity) {
+		entity.setData(OffsetDateTime.now());
+		entity.setStatus(StatusEntregaEnum.CRIADO.getCodigo());
 		return repository.save(entity);
 	}
 	

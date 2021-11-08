@@ -53,7 +53,7 @@ public class Entrega implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "caixa_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Caixa caixa;
 
 	@ManyToOne(fetch = FetchType.EAGER)

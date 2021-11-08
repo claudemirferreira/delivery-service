@@ -37,6 +37,12 @@ public class CaixaController {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
+
+	@RequestMapping(value = "/ativo", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<Caixa> findCaixaAberto() {
+		return ResponseEntity.ok(service.getCaixaAtivo());
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
 		try {

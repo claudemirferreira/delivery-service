@@ -10,5 +10,7 @@ public class EntregadorDTO {
 	private Integer id;
 	
 	private String nome;
+	
+	private String status;
 
 }

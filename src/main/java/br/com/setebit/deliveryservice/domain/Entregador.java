@@ -30,4 +30,7 @@ public class Entregador implements Serializable {
 	@Column(length = 100, nullable = false)
 	private String nome;
 
+	@Column(length = 1)
+	private String status;
+
 }

@@ -30,6 +30,28 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+    
+    @ExceptionHandler(NaoExisteCaixaAbertoException.class)
+    public ResponseEntity<Object> handleNaoExisteCaixaAbertoException(
+    		EntregadorNotFoundException ex, WebRequest request) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Entregador not found");
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(ExisteVariosCaixaAbertoException.class)
+    public ResponseEntity<Object> handleExisteVariosCaixaAbertoException(
+    		EntregadorNotFoundException ex, WebRequest request) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Entregador not found");
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(NoDataFoundException.class)
     public ResponseEntity<Object> handleNodataFoundException(

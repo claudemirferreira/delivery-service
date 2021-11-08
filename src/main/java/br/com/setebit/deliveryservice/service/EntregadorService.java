@@ -72,6 +72,9 @@ public class EntregadorService {
 
 		if (filtro.getNome().length() > 0)
 			condictions.add(" UPPER(l.nome) like :nome");
+		
+		if (filtro.getStatus().length() > 0)
+			condictions.add(" l.status = :status ");
 	}
 
 	private void setParameter(Query query, EntregadorDTO filtro) {
@@ -80,6 +83,9 @@ public class EntregadorService {
 
 		if (filtro.getNome().length() > 0)
 			query.setParameter("nome", "%"+filtro.getNome().toUpperCase()+"%");
+
+		if (filtro.getStatus().length() > 0)
+			query.setParameter("status", filtro.getStatus());
 	}
 
 }
